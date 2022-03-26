@@ -1,0 +1,18 @@
+version: "3.9" 
+services:
+  hadoop:
+    image: hadoop:1.0
+    hostname: hadoop-master
+    container_name: hadoop
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+    ports:
+      - "8088:8088"
+      - "51070:50070"
+    networks:
+      - devops-net
+
+networks:
+  devops-net:
+    external:
+      name: devops-net
