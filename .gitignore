@@ -1,2 +1,9 @@
 *.tar.gz
 *.tgz
+target/
+.class
+wordcount/
+.metals/
+.idea/
+.bloop/
+.conf

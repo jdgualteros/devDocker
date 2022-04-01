@@ -1,0 +1,28 @@
+version: '3.9'
+services:
+  jenkins:
+    image: jenkins/jenkins:lts
+    hostname: jenkins
+    privileged: true
+    user: root
+    networks: 
+      - devops-net
+    ports:
+      - 8200:8080
+      - 50000:50000
+      - 9000:9000
+    container_name: jenkins
+    volumes:
+      - jenkins-var:/var/jenkins_home #Remember that, the tmp directory is designed to be wiped on system reboot.
+      - jenkins-sock:/var/run/docker.sock
+      - jenkins-usr:/usr/local/bin/docker
+      - maven:/root/.m2
+networks:
+  devops-net:
+    external: true
+volumes:
+  jenkins-var:
+  jenkins-sock:
+  jenkins-usr:
+  maven:
+    external: true
