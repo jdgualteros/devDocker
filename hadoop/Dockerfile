@@ -9,6 +9,7 @@ RUN echo "hadoop ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 USER hadoop
 
 WORKDIR /opt/
+RUN echo "ddd"
 COPY conf/* .
 ADD resources/hadoop-3.3.1.tar.gz . 
 
@@ -26,7 +27,6 @@ RUN cd $HADOOP_HOME/etc/hadoop && rm core-site.xml hdfs-site.xml yarn-site.xml m
 RUN mv *xml $HADOOP_HOME/etc/hadoop/.
 
 RUN $HADOOP_HOME/bin/hdfs namenode -format
-
 
 # Hdfs ports
 # EXPOSE 9000 50010 50020 50070 50075 50090 56070
