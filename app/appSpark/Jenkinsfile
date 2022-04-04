@@ -8,6 +8,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
+                sh 'ls /var/jenkins_home/workspace/devDocker_main'
                 sh 'mvn -B -DskipTest clean package'
             }
         }
