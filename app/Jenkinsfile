@@ -1,14 +1,14 @@
 pipeline {
     agent {
         docker {
-            image 'maven:1.0'
+            image 'maven'
             args '-v $HOME/.m2:/root/.m2'
         }
     }
     stages {
         stage('Build') {
             steps {
-                sh 'cd /var/jenkins_home/workspace/devDocker_main/app && mvn -B -DskipTest clean package -s /root/.m2/settings-nexus.xml'
+                sh 'cd /var/jenkins_home/workspace/devDocker_main/app && mvn -B -DskipTest clean package -s /root/.m2/settings-dan.xml'
             }
         }
     }
