@@ -1,0 +1,3 @@
+pipeline-stage-view:2.22
+blueocean:1.25.2
+docker-workflow:1.28

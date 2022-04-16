@@ -21,6 +21,8 @@ services:
     container_name: spark
     stdin_open: true # docker run -i
     tty: true        # docker run -t
+    environment:
+      - HADOOP_USER_NAME=hadoop
     depends_on:
       - hadoop
     ports:
@@ -28,7 +30,7 @@ services:
       - "4040:4040"
       - "9080:8080"
       - "2223:22"
-      - "7777:7077"
+      - "7077:7077"
     networks:
       - devops-net
 

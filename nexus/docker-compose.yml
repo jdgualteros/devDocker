@@ -1,0 +1,23 @@
+version: '3.9'
+services:
+  nexus:
+    image: sonatype/nexus3
+    container_name: nexus
+    hostname: nexus
+    restart: unless-stopped
+    user: root
+    networks:
+      - devops-net
+    ports:
+      - 17251:8081
+      - 8085:8085
+      - 40000:50000
+    volumes:
+      - nexus-data:/nexus-data
+
+networks:
+  devops-net:
+    name: devops-net
+
+volumes:
+  nexus-data:
