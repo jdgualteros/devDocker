@@ -9,7 +9,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'ls -l /root/.m2'
-                sh 'cd /var/jenkins_home/workspace/devDocker_main/app && mvn -B -DskipTest clean package'
+                sh 'cd /var/jenkins_home/workspace/devDocker_main/app && mvn -B -DskipTest clean package -d /root/.m2/settings-nexus.xml'
             }
         }
     }
