@@ -1,15 +1,21 @@
 pipeline {
     agent {
         docker {
-            image 'maven'
+            image 'maven:3-jdk-8-alpine'
             args '-v /mnt/c/Users/LENOVO/.m2:/root/.m2'
+            workdir '/var/jenkins_home/workspace/devDocker_main/ap'
         }
     }
     stages {
+        stage('test'){
+            steps{
+                sh 
+            }
+        }
         stage('Build') {
             steps {
                 sh 'ls -l /root/.m2'
-                sh 'cd /var/jenkins_home/workspace/devDocker_main/app && mvn -B -DskipTest clean package'
+                sh 'cd $workdir && mvn -B -DskipTest clean package'
             }
         }
     }

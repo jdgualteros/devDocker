@@ -23,3 +23,6 @@ networks:
 volumes:
   data:
     name: jenkins-data
+  maven:
+    name: maven
+    external: true
