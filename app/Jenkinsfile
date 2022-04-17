@@ -4,9 +4,9 @@ pipeline {
             image 'maven:3-jdk-8-alpine'
             args '-v /mnt/c/Users/LENOVO/.m2:/root/.m2'
         }
-        environment {
-            WORKDIR = '/var/jenkins_home/workspace/devDocker_main/app'
-        }
+    }
+    environment {
+    WORKDIR = '/var/jenkins_home/workspace/devDocker_main/app'
     }
     stages {
         stage('Build') {
