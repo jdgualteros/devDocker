@@ -16,7 +16,7 @@ pipeline {
                         -DartifactId=spark-setup \
                         -Dversion=1.0-SNAPSHOT \
                         -Dpackaging=jar \
-                        -Dfile=spark-setup-1.0-SNAPSHOT.jar \
+                        -Dfile=target/spark-setup-1.0-SNAPSHOT.jar \
                         -DgeneratePom=true \
                         -DrepositoryId=nexus \
                         -Durl=http://localhost:17251/repository/release/'
