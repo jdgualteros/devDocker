@@ -12,7 +12,7 @@ pipeline {
                 dir("app")
                     {
                     script {
-                        def pom = readMavenPom file: './rest-locations-service/pom.xml'  
+                        def pom = readMavenPom file: './pom.xml'  
                         sh 'mvn -B -DskipTest clean package'
                         }
                     }
