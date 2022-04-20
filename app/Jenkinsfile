@@ -12,8 +12,7 @@ pipeline {
                 dir("app")
                     {
                     script {
-                        ArtifactId = readMavenPom().getArtifactId()
-                        echo $ArtifactId
+                        def pom = readMavenPom file: './rest-locations-service/pom.xml'  
                         sh 'mvn -B -DskipTest clean package'
                         }
                     }
