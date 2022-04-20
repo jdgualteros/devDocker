@@ -13,7 +13,7 @@ pipeline {
                     {
                     script {
                         def pom = readMavenPom file: './pom.xml'  
-                        echo ${pom.version}
+                        echo "${pom.version}"
                         sh 'mvn -B -DskipTest clean package'
                         }
                     }
