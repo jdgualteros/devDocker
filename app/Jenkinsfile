@@ -10,8 +10,9 @@ pipeline {
          {
             steps {
                 dir("app"){
-                    def pom = readMavenPom file: "pom.xml";
-                    def filesByGlob = findFiles(glob: "target/*.${pom.packaging}");
+                    script {
+                    def pom = readMavenPom file: "pom.xml"
+                    def filesByGlob = findFiles(glob: "target/*.${pom.packaging}")
                     echo "${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}"
                     
                     sh 'mvn -B -DskipTest clean package'
@@ -23,6 +24,7 @@ pipeline {
                             -DgeneratePom=true \
                             -DrepositoryId=nexus \
                             -Durl=http://localhost:17251/repository/release/'
+                    }
                             }
                   }
          }
