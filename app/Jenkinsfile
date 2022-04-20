@@ -9,15 +9,15 @@ pipeline {
         stage('Build') {
             steps {
                 dir("app"){
-                sh 'mvn -B -DskipTest clean package'
-                sh 'mvn deploy:deploy-file -DgroupId=com.oliver \
-                        -DartifactId=spark-setup \
-                        -Dversion=1.0-SNAPSHOT \
-                        -Dpackaging=jar \
-                        -Dfile=app/target/spark-setup-1.0-SNAPSHOT.jar \
-                        -DgeneratePom=true \
-                        -DrepositoryId=nexus \
-                        -Durl=http://localhost:17251/repository/release/'
+                    sh 'mvn -B -DskipTest clean package'
+                    sh 'mvn deploy:deploy-file -DgroupId=com.oliver \
+                            -DartifactId=spark-setup \
+                            -Dversion=1.0-SNAPSHOT \
+                            -Dpackaging=jar \
+                            -Dfile=target/spark-setup-1.0-SNAPSHOT.jar \
+                            -DgeneratePom=true \
+                            -DrepositoryId=nexus \
+                            -Durl=http://localhost:17251/repository/release/'
                 }
             }
         }
