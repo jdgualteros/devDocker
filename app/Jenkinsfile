@@ -5,13 +5,11 @@ pipeline {
             args '-v /mnt/c/Users/LENOVO/.m2:/root/.m2'
         }
     }
-    environment {
-    WORKDIR = '/var/jenkins_home/workspace/devDocker_main/app'
-    }
     stages {
         stage('Build') {
             steps {
-                sh 'cd ${WORKDIR} && mvn -B -DskipTest clean package'
+                dir("app"){
+                sh 'mvn -B -DskipTest clean package'
                 sh 'mvn deploy:deploy-file -DgroupId=com.oliver \
                         -DartifactId=spark-setup \
                         -Dversion=1.0-SNAPSHOT \
@@ -20,6 +18,7 @@ pipeline {
                         -DgeneratePom=true \
                         -DrepositoryId=nexus \
                         -Durl=http://localhost:17251/repository/release/'
+                }
             }
         }
     }
