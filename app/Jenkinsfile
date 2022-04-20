@@ -24,7 +24,7 @@ pipeline {
                     {
                         def pom = readMavenPom file: './pom.xml'  
                         echo "${pom.version}"
-                        sh "mvn deploy:deploy-file -DgroupId=com.oliver \
+                        sh "mvn deploy:deploy-file -DgroupId="${pom.groupId}" \
                         -DartifactId="${pom.artifactId}" \
                         -Dversion="${pom.version}" \
                         -Dpackaging=jar \
