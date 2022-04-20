@@ -5,28 +5,38 @@ pipeline {
             args '-v /mnt/c/Users/LENOVO/.m2:/root/.m2'
                 }
           }
+        environment{
+            ArtifactId = readMavenPom().getArtifactId()
+            Version = readMavenPom().getVersion()
+            Name = readMavenPom().getName()
+            GroupId = readMavenPom().getGroupId()
+             }
     stages {
         stage('Build')
          {
             steps {
-                dir("app"){
+                dir("app")
+                    {
                     script {
-                    def pom = readMavenPom file: "pom.xml"
-                    def filesByGlob = findFiles(glob: "target/*.${pom.packaging}")
-                    echo "${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}"
-                    
-                    sh 'mvn -B -DskipTest clean package'
-                    sh 'mvn deploy:deploy-file -DgroupId=com.oliver \
-                            -DartifactId=spark-setup \
-                            -Dversion=1.0-SNAPSHOT \
-                            -Dpackaging=jar \
-                            -Dfile=target/spark-setup-1.0-SNAPSHOT.jar \
-                            -DgeneratePom=true \
-                            -DrepositoryId=nexus \
-                            -Durl=http://localhost:17251/repository/release/'
+                        echo $ArtifactId
+                        sh 'mvn -B -DskipTest clean package'
+                        }
                     }
-                            }
                   }
+         }
+         stage ('Publish to Nexus'){
+            steps {
+                script {
+                    sh 'mvn deploy:deploy-file -DgroupId=com.oliver \
+                    -DartifactId=spark-setup \
+                    -Dversion=1.0-SNAPSHOT \
+                    -Dpackaging=jar \
+                    -Dfile=target/spark-setup-1.0-SNAPSHOT.jar \
+                    -DgeneratePom=true \
+                    -DrepositoryId=nexus \
+                    -Durl=http://localhost:17251/repository/release/'
+                }
+            }
          }
     }
 }
