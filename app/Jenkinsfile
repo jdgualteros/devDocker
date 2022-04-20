@@ -24,14 +24,14 @@ pipeline {
                     {
                         def pom = readMavenPom file: './pom.xml'  
                         echo "${pom.version}"
-                        sh 'mvn deploy:deploy-file -DgroupId=com.oliver \
+                        sh "mvn deploy:deploy-file -DgroupId=com.oliver \
                         -DartifactId="${pom.artifactId}" \
                         -Dversion="${pom.version}" \
                         -Dpackaging=jar \
                         -Dfile=target/spark-setup-1.0-SNAPSHOT.jar \
                         -DgeneratePom=true \
                         -DrepositoryId=nexus \
-                        -Durl=http://localhost:17251/repository/release/'
+                        -Durl=http://localhost:17251/repository/release/"
                     }
                 }
             }
